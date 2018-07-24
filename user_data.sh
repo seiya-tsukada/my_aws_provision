@@ -8,3 +8,4 @@ chmod 400 ~/.ssh/config
 git clone git@github.com:seiya-tsukada/my_aws_provision.git ~/my_aws_provision
 
 yum -y install gcc-c++
+yum -y install docker
