@@ -1,0 +1,9 @@
+# This playbook is for Amazon Linux
+- hosts: Amazon Linux
+  tasks:
+    - name: yum update
+      yum: state=latest name=*
+    - name: install gcc-c++
+      yum: state=latest name=gcc-++
+    - name: install docker
+      yum: state=latest name=docker
