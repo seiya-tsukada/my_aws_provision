@@ -1,19 +1,21 @@
 #!/bin/bash
 
-yum -y install git
-pip install ansible
+/usr/bin/yum -y install git
 
-aws s3 cp s3://my-provision.whiteray.tokyo/git-keys/id_git_rsa ~/.ssh/id_rsa
-aws s3 cp s3://my-provision.whiteray.tokyo/ssh/config ~/.ssh/config
-aws s3 cp s3://my-provision.whiteray.tokyo/provision/provision.yml /tmp/provision.yml
+/usr/bin/pip install --upgrade pip
+/usr/local/bin/pip install ansible
 
+/usr/bin/aws s3 cp s3://my-provision.whiteray.tokyo/git-keys/id_git_rsa ~/.ssh/id_rsa
+/usr/bin/aws s3 cp s3://my-provision.whiteray.tokyo/ssh/config ~/.ssh/config
+/usr/bin/aws s3 cp s3://my-provision.whiteray.tokyo/provision/provision.yml /tmp/provision.yml
 
-echo -e "[server]\n127.0.0.1" > /tmp/hosts
-ansible-playbook -i /tmp/hosts /tmp/provision.yml --connection=local
+/bin/echo -e "[server]\n127.0.0.1" > /tmp/hosts
+/usr/local/bin/ansible-playbook -i /tmp/hosts /tmp/provision.yml --connection=local
 
-chmod 400 ~/.ssh/id_rsa
-chmod 400 ~/.ssh/config
-git clone git@github.com:seiya-tsukada/my_aws_provision.git ~/my_aws_provision
+/bin/chmod 400 ~/.ssh/id_rsa
+/bin/chmod 400 ~/.ssh/config
+
+/usr/bin/git clone git@github.com:seiya-tsukada/my_aws_provision.git ~/my_aws_provision
 
 
 

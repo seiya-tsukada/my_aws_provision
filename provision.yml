@@ -7,3 +7,6 @@
       yum: state=latest name=gcc-c++
     - name: install docker
       yum: state=latest name=docker
+    - name: start docker
+      service:
+        name=docker state=started enabled=yes
