@@ -1,12 +1,29 @@
 # This playbook is for Amazon Linux
 - hosts: server
+  vars:
+    socat_version: "1.7.3.0"
   tasks:
     - name: yum update
       yum: state=latest name=*
     - name: install gcc-c++
       yum: state=latest name=gcc-c++
+    - name: install wget
+      yum: state=latest name=wget
+    - name: install make
+      yum: state=latest name=make
     - name: install docker
       yum: state=latest name=docker
     - name: start docker
       service:
         name=docker state=started enabled=yes
+    - name: download socat
+      get_url: url=http://www.dest-unreach.org/socat/download/socat-{{ socat_version }}.tar.gz dest=/usr/local/src/
+    - name: deploy socat package
+      unarchive:
+        src: /usr/local/src/socat-{{ socat_version }}.tar.gz
+        dest: /usr/local/src/
+        remote_src: no
+    - name: install socat
+      shell: ./configure && make && make install
+      args:
+        chdir: /usr/local/src/socat-{{ socat_version }}
